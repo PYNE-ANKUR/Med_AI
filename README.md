@@ -1,5 +1,5 @@
 
-# 🩺 Lifestyle Disease Risk Prediction & Health Monitoring System
+#  Lifestyle Cardiovascular Disease Risk Prediction & Health Monitoring System
 
 ##  Live Dashboard
  [Click here to view the live dashboard](https://health-monitoring-system-s6wr65wid.vercel.app)
@@ -15,7 +15,7 @@ The goal of this project is to demonstrate how **data analysis and predictive mo
 
 ---
 
-## 🎯 Objectives
+##  Objectives
 * Analyze healthcare datasets to identify patterns related to lifestyle diseases
 * Build and compare multiple machine learning models for disease risk prediction
 * Provide accurate risk assessments based on comprehensive health parameters
@@ -26,14 +26,14 @@ The goal of this project is to demonstrate how **data analysis and predictive mo
 ---
 
 ##  Key Features
-✔ Health data preprocessing and cleaning from NHANES dataset
-✔ Lifestyle disease risk prediction using machine learning (Gradient Boosting)
-✔ Feature engineering (BMI categories, BP stages, waist-to-height ratio, etc.)
-✔ User input system for personal health parameters
-✔ Risk probability calculation and factor identification
-✔ Interactive web interface with real-time predictions
-✔ API endpoint for integration with other systems
-✔ Model performance validation (99.91% accuracy)
+* Health data preprocessing and cleaning from NHANES dataset
+* Lifestyle disease risk prediction using machine learning (Gradient Boosting)
+* Feature engineering (BMI categories, BP stages, waist-to-height ratio, etc.)
+* User input system for personal health parameters
+* Risk probability calculation and factor identification
+* Interactive web interface with real-time predictions
+* API endpoint for integration with other systems
+* Model performance validation (99.91% accuracy)
 
 ---
 
