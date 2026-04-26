@@ -1,12 +1,12 @@
 
 # 🩺 Lifestyle Disease Risk Prediction & Health Monitoring System
 
-## 🔴 Live Dashboard
-👉 [Click here to view the live dashboard](https://health-monitoring-system-s6wr65wid.vercel.app)
+##  Live Dashboard
+ [Click here to view the live dashboard](https://health-monitoring-system-s6wr65wid.vercel.app)
 
 ---
 
-## 📌 Project Overview
+##  Project Overview
 This project analyzes health-related data to predict the **risk of cardiovascular and lifestyle diseases** based on an individual's health parameters. Users input health information such as **age, BMI, blood pressure, smoking status, waist circumference, and other lifestyle indicators**, and the system uses a trained machine learning model to estimate disease risk.
 
 The project also generates **visual insights through a dashboard** to help users better understand their health patterns and risk factors.
@@ -25,7 +25,7 @@ The goal of this project is to demonstrate how **data analysis and predictive mo
 
 ---
 
-## 🧠 Key Features
+##  Key Features
 ✔ Health data preprocessing and cleaning from NHANES dataset
 ✔ Lifestyle disease risk prediction using machine learning (Gradient Boosting)
 ✔ Feature engineering (BMI categories, BP stages, waist-to-height ratio, etc.)
@@ -37,7 +37,7 @@ The goal of this project is to demonstrate how **data analysis and predictive mo
 
 ---
 
-## 🤖 ML Model Results
+##  ML Model Results
 The backend trains and compares **6 machine learning models** on the NHANES dataset (5,735 participants):
 
 | Model | Accuracy | F1 Score | AUC-ROC | CV Mean |
@@ -45,7 +45,7 @@ The backend trains and compares **6 machine learning models** on the NHANES data
 | Logistic Regression | 95.12% | 0.9712 | 0.9777 | 0.9571 |
 | Decision Tree | 99.91% | 0.9995 | 0.9973 | 0.9993 |
 | Random Forest | 99.74% | 0.9984 | 1.0000 | 0.9928 |
-| **Gradient Boosting** ✅ | **99.91%** | **0.9995** | **1.0000** | **0.9993** |
+| **Gradient Boosting**  | **99.91%** | **0.9995** | **1.0000** | **0.9993** |
 | SVM | 97.04% | 0.9825 | 0.9943 | 0.9693 |
 | KNN | 96.34% | 0.9783 | 0.9881 | 0.9629 |
 
@@ -62,7 +62,7 @@ The backend trains and compares **6 machine learning models** on the NHANES data
 
 ---
 
-## 📊 Input Parameters
+##  Input Parameters
 The system analyzes the following user inputs:
 
 ### Demographic & Clinical Factors
@@ -86,7 +86,7 @@ Using these parameters, the system estimates the **risk probability of cardiovas
 
 ---
 
-## 📈 Output
+##  Output
 The system provides:
 * **Risk Level**: Low Risk or High Risk classification
 * **Risk Probability**: 0–100% likelihood of disease
@@ -129,7 +129,7 @@ Health-Monitoring-System/
 
 ---
 
-## 🚀 How to Run Locally
+##  How to Run Locally
 
 ### Prerequisites
 ```bash
@@ -156,7 +156,7 @@ Then visit: **http://127.0.0.1:5000**
 
 ---
 
-## 📐 Feature Engineering
+##  Feature Engineering
 The model includes these engineered features:
 
 | Feature | Description | Example Values |
@@ -169,7 +169,7 @@ The model includes these engineered features:
 
 ---
 
-## 🔍 Risk Factor Identification
+##  Risk Factor Identification
 The system automatically identifies contributing risk factors:
 
 ✗ **Hypertension** — BP Stage ≥ 1  
@@ -180,7 +180,7 @@ The system automatically identifies contributing risk factors:
 
 ---
 
-## 📡 API Endpoints
+##  API Endpoints
 
 ### GET `/`
 Renders the web interface.
@@ -266,17 +266,17 @@ Health check endpoint.
 
 ---
 
-## 📝 License
+##  License
 This project is open source and available for educational purposes.
 
 ---
 
-## 👥 Contributing
+##  Contributing
 Contributions are welcome! Feel free to fork, improve, and submit pull requests.
 
 ---
 
-## 📧 Contact
+##  Contact
 For questions or issues, please open an issue on the repository.
 
 ---
@@ -287,7 +287,7 @@ For questions or issues, please open an issue on the repository.
 
 ---
 
-## 🚀 Run the ML Backend Locally
+##  Run the ML Backend Locally
 
 ### 1. Clone the repo
 ```bash
@@ -309,7 +309,7 @@ This will print all model results and generate 4 plots in an `outputs/` folder.
 
 ---
 
-## 🖥 Run the Dashboard Locally
+##  Run the Dashboard Locally
 
 ```bash
 cd dashboard
@@ -320,7 +320,7 @@ Open `http://localhost:5173` in your browser.
 
 ---
 
-## 📂 Project Workflow
+##  Project Workflow
 1️⃣ Data Collection
 2️⃣ Data Preprocessing
 3️⃣ Exploratory Data Analysis (EDA)
@@ -331,7 +331,7 @@ Open `http://localhost:5173` in your browser.
 
 ---
 
-## 📊 Dataset Analysis
+##  Dataset Analysis
 The NHANES dataset contains multiple health and lifestyle parameters analyzed to identify correlations between **lifestyle habits and disease risks.**
 
 Key findings:
@@ -342,9 +342,9 @@ Key findings:
 
 ---
 
-## 🔮 Future Scope
+##  Future Scope
 
-### 1️⃣ Computer Vision Based Rehabilitation Assistant
+### 1️ Computer Vision Based Rehabilitation Assistant
 A future version aims to integrate **OpenCV-based rehabilitation exercise monitoring**, where:
 * Patients perform rehabilitation exercises
 * The system detects body posture using computer vision
@@ -352,19 +352,19 @@ A future version aims to integrate **OpenCV-based rehabilitation exercise monito
 
 This feature is **currently proposed as a future enhancement and has not yet been implemented.**
 
-### 2️⃣ Machine Learning Model Improvements
+### 2️ Machine Learning Model Improvements
 * Train deep learning models (Neural Networks)
 * Improve accuracy of disease risk prediction
 
-### 3️⃣ Real-Time Health Monitoring
+### 3️ Real-Time Health Monitoring
 Integration with wearable devices for real-time health data.
 
-### 4️⃣ Backend API
+### 4️ Backend API
 Build a REST API so the dashboard can call the ML model directly in real time.
 
 ---
 
-## 📜 License
+##  License
 This project is open source and available under the **MIT License**.
 
 
