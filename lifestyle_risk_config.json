@@ -1,0 +1,78 @@
+{
+  "model_name": "Gradient Boosting",
+  "best_model_key": "gradient_boosting",
+  "auc_roc": 1.0,
+  "accuracy": 0.999128160418483,
+  "f1_score": 0.9994821336095288,
+  "features": [
+    "AGE",
+    "GENDER",
+    "BMI",
+    "SBP",
+    "DBP",
+    "Smoking Status",
+    "Waist Circumference",
+    "Arm Circumference",
+    "INDFMPIR",
+    "BMI_Category",
+    "BP_Stage",
+    "Age_Group",
+    "WHtR",
+    "Pulse_Pressure",
+    "Alcohol Use",
+    "Average Drinks",
+    "Household Size"
+  ],
+  "needs_scaling": false,
+  "model_type": "gradient_boosting",
+  "models": {
+    "logistic_regression": {
+      "name": "Logistic Regression",
+      "file": "lifestyle_risk_logistic_regression_model.pkl",
+      "needs_scaling": true,
+      "accuracy": 0.951176983435048,
+      "f1_score": 0.9712230215827338,
+      "auc_roc": 0.9777088196777316
+    },
+    "decision_tree": {
+      "name": "Decision Tree",
+      "file": "lifestyle_risk_decision_tree_model.pkl",
+      "needs_scaling": false,
+      "accuracy": 0.999128160418483,
+      "f1_score": 0.9994821336095288,
+      "auc_roc": 0.9972527472527473
+    },
+    "random_forest": {
+      "name": "Random Forest",
+      "file": "lifestyle_risk_random_forest_model.pkl",
+      "needs_scaling": false,
+      "accuracy": 0.997384481255449,
+      "f1_score": 0.9984464008285863,
+      "auc_roc": 0.9999715310596139
+    },
+    "gradient_boosting": {
+      "name": "Gradient Boosting",
+      "file": "lifestyle_risk_gradient_boosting_model.pkl",
+      "needs_scaling": false,
+      "accuracy": 0.999128160418483,
+      "f1_score": 0.9994821336095288,
+      "auc_roc": 1.0
+    },
+    "svm": {
+      "name": "SVM",
+      "file": "lifestyle_risk_svm_model.pkl",
+      "needs_scaling": true,
+      "accuracy": 0.970357454228422,
+      "f1_score": 0.9824742268041237,
+      "auc_roc": 0.994328987075101
+    },
+    "knn": {
+      "name": "KNN",
+      "file": "lifestyle_risk_knn_model.pkl",
+      "needs_scaling": true,
+      "accuracy": 0.963382737576286,
+      "f1_score": 0.9782833505687694,
+      "auc_roc": 0.9881085236007515
+    }
+  }
+}

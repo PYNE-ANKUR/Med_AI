@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lifestyle Disease Risk Prediction</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <main class="page-shell">
+        <section class="hero">
+            <div class="hero-copy">
+                <span class="eyebrow">Med_AI</span>
+                <h1>Lifestyle Based Preediction for Cardiovascualr Diseases</h1>
+                <p>Enter your health and lifestyle details to estimate your cardiovascualr disease risk with the trained prediction model.</p>
+            </div>
+            <div class="hero-card">
+                <div class="hero-icon">+</div>
+                <div>
+                    <span>Model Ready</span>
+                    <strong>{{ model_name or "Risk Classifier" }}</strong>
+                </div>
+            </div>
+        </section>
+
+        <section class="workspace">
+            <form class="predict-card" method="POST">
+                <div class="section-heading">
+                    <span>01</span>
+                    <div>
+                        <h2>Prediction Model</h2>
+                        <p>Choose any trained model, or keep the recommended best model.</p>
+                    </div>
+                </div>
+
+                <div class="model-panel">
+                    <div class="field">
+                        <label for="selected_model">Select Model</label>
+                        <select id="selected_model" name="selected_model" required>
+                            {% for model in available_models %}
+                                <option value="{{ model.key }}" {% if form_values.selected_model == model.key %}selected{% endif %}>
+                                    {{ model.name }}{% if model.is_best %} (Recommended){% endif %}
+                                </option>
+                            {% endfor %}
+                        </select>
+                        <small>Current: {{ selected_model_name }}</small>
+                    </div>
+
+                    <div class="model-grid">
+                        {% for model in available_models %}
+                            <div class="model-chip {% if form_values.selected_model == model.key %}active{% endif %}">
+                                <strong>{{ model.name }}</strong>
+                                <span>AUC {{ "%.3f"|format(model.auc_roc) if model.auc_roc is not none else "N/A" }}</span>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="section-heading compact">
+                    <span>02</span>
+                    <div>
+                        <h2>Patient Details</h2>
+                        <p>Fill every field for a complete assessment.</p>
+                    </div>
+                </div>
+
+                <div class="form-grid">
+                    <div class="field">
+                        <label for="age">Age</label>
+                        <input type="number" id="age" name="age" min="18" max="120" value="{{ form_values.age }}" required>
+                        <small>18 to 120 years</small>
+                    </div>
+
+                    <div class="field">
+                        <label for="gender">Gender</label>
+                        <select id="gender" name="gender" required>
+                            <option value="1" {% if form_values.gender == 1 %}selected{% endif %}>Male</option>
+                            <option value="2" {% if form_values.gender == 2 %}selected{% endif %}>Female</option>
+                        </select>
+                    </div>
+
+                    <div class="field">
+                        <label for="bmi">BMI</label>
+                        <input type="number" id="bmi" name="bmi" step="0.1" min="10" max="70" value="{{ form_values.bmi }}" required>
+                        <small>Body Mass Index, kg/m2</small>
+                    </div>
+
+                    <div class="field">
+                        <label for="waist_circumference">Waist Circumference</label>
+                        <input type="number" id="waist_circumference" name="waist_circumference" step="0.1" min="50" max="200" value="{{ form_values.waist_circumference }}" required>
+                        <small>Measurement in centimeters</small>
+                    </div>
+                </div>
+
+                <div class="section-heading compact">
+                    <span>03</span>
+                    <div>
+                        <h2>Vitals</h2>
+                        <p>Blood pressure and body measurements.</p>
+                    </div>
+                </div>
+
+                <div class="form-grid">
+                    <div class="field">
+                        <label for="systolic_bp">Systolic BP</label>
+                        <input type="number" id="systolic_bp" name="systolic_bp" step="1" min="70" max="250" value="{{ form_values.systolic_bp }}" required>
+                        <small>Upper reading, mmHg</small>
+                    </div>
+
+                    <div class="field">
+                        <label for="diastolic_bp">Diastolic BP</label>
+                        <input type="number" id="diastolic_bp" name="diastolic_bp" step="1" min="40" max="150" value="{{ form_values.diastolic_bp }}" required>
+                        <small>Lower reading, mmHg</small>
+                    </div>
+
+                    <div class="field">
+                        <label for="arm_circumference">Arm Circumference</label>
+                        <input type="number" id="arm_circumference" name="arm_circumference" step="0.1" min="15" max="50" value="{{ form_values.arm_circumference }}" required>
+                        <small>Upper arm, centimeters</small>
+                    </div>
+
+                    <div class="field">
+                        <label for="income_pir">Income-to-Poverty Ratio</label>
+                        <input type="number" id="income_pir" name="income_pir" step="0.1" min="0" max="5" value="{{ form_values.income_pir }}" required>
+                        <small>Socioeconomic indicator</small>
+                    </div>
+                </div>
+
+                <div class="section-heading compact">
+                    <span>04</span>
+                    <div>
+                        <h2>Lifestyle</h2>
+                        <p>Habits used by the model for prediction.</p>
+                    </div>
+                </div>
+
+                <div class="form-grid">
+                    <div class="field">
+                        <label for="smoking_status">Smoking Status</label>
+                        <select id="smoking_status" name="smoking_status" required>
+                            <option value="1" {% if form_values.smoking_status == 1 %}selected{% endif %}>Non-smoker</option>
+                            <option value="2" {% if form_values.smoking_status == 2 %}selected{% endif %}>Smoker</option>
+                        </select>
+                    </div>
+
+                    <div class="field">
+                        <label for="alcohol_use">Alcohol Use</label>
+                        <select id="alcohol_use" name="alcohol_use" required>
+                            <option value="1" {% if form_values.alcohol_use == 1 %}selected{% endif %}>Drinks alcohol</option>
+                            <option value="2" {% if form_values.alcohol_use == 2 %}selected{% endif %}>Does not drink</option>
+                        </select>
+                    </div>
+
+                    <div class="field">
+                        <label for="avg_drinks">Average Drinks</label>
+                        <input type="number" id="avg_drinks" name="avg_drinks" step="0.5" min="0" max="20" value="{{ form_values.avg_drinks }}" required>
+                        <small>Per drinking session</small>
+                    </div>
+
+                    <div class="field">
+                        <label for="household_size">Household Size</label>
+                        <input type="number" id="household_size" name="household_size" min="1" max="20" value="{{ form_values.household_size }}" required>
+                        <small>Number of people</small>
+                    </div>
+                </div>
+
+                <button class="primary-action" type="submit">
+                    <span>Get Prediction</span>
+                    <strong>Assess Risk</strong>
+                </button>
+            </form>
+
+            <aside class="result-card {% if prediction and risk_percentage and risk_percentage >= 50 %}high{% elif prediction %}low{% endif %}">
+                {% if prediction %}
+                    {% if prediction.startswith("Error:") %}
+                        <div class="empty-result error-result">
+                            <span>!</span>
+                            <h2>Prediction Error</h2>
+                            <p>{{ prediction }}</p>
+                        </div>
+                    {% else %}
+                        <div class="result-topline">Prediction Result</div>
+                        <div class="score-ring" style="--score: {{ risk_percentage or 0 }}%">
+                            <div>
+                                <strong>{{ risk_percentage }}%</strong>
+                                <span>Project risk score</span>
+                            </div>
+                        </div>
+                        <h2>{{ prediction }}</h2>
+                        <div class="meter">
+                            <span style="width: {{ risk_percentage }}%"></span>
+                        </div>
+                        <p class="probability">Continuous score: {{ risk_probability }} on a 0-1 scale</p>
+
+                        <div class="result-block">
+                            <h3>Contributing Factors</h3>
+                            {% if contributing_factors and contributing_factors|length > 0 %}
+                                <div class="factor-list">
+                                    {% for factor in contributing_factors %}
+                                        <span>{{ factor.label }} <strong>+{{ factor.impact }} pts</strong></span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                <p class="healthy-note">No major risk factors detected from the entered values.</p>
+                            {% endif %}
+                        </div>
+
+                        {% if input_data %}
+                            <div class="summary-box">
+                                <strong>Submitted Summary</strong>
+                                <p>{{ input_data.age }} year old {{ input_data.gender }}, BMI {{ input_data.bmi }}, BP {{ input_data.sbp }}/{{ input_data.dbp }}, {{ input_data.smoking }}. Model: {{ input_data.model }}.</p>
+                            </div>
+                        {% endif %}
+                    {% endif %}
+                {% else %}
+                    <div class="empty-result">
+                        <span>+</span>
+                        <h2>Your prediction will appear here</h2>
+                        <p>Complete the form and click Assess Risk to view the model output, probability, and key contributing factors.</p>
+                    </div>
+                {% endif %}
+            </aside>
+        </section>
+
+        <section class="advice-section">
+            <div class="advice-header">
+                <div>
+                    <span class="eyebrow-light">Care Plan</span>
+                    <h2>Precautionary Advice</h2>
+                </div>
+                <p>Personalized steps are generated from the strongest contributing factors in your result.</p>
+            </div>
+
+            {% if prediction and not prediction.startswith("Error:") and precautionary_advice and precautionary_advice|length > 0 %}
+                <div class="advice-list">
+                    {% for item in precautionary_advice %}
+                        <div class="advice-item">
+                            <strong>{{ item.title }}</strong>
+                            <p>{{ item.text }}</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="advice-placeholder">
+                    <strong>Advice will appear after prediction</strong>
+                    <p>Enter details on the left and assess risk to receive precautionary steps tailored to the result.</p>
+                </div>
+            {% endif %}
+        </section>
+
+        <p class="footer-note">This tool is for educational risk screening and should not replace medical advice.</p>
+    </main>
+</body>
+</html>
